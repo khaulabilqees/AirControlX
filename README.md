@@ -1,12 +1,13 @@
 # Air Traffic Control System (ATCS) - OS semester project
 
 A multithreaded, multi-process C++ simulation of an Air Traffic Control System (ATCS) using forks, mutexes, inter-process communication via named pipes (FIFOs), threads. The system handles airline violations, automatic violation notices (AVNs), payment processing, and portal tracking.
-atcs class, the general control system, contains all airlines and each airline class contains its respective flights
+
 ---
 
 ##  Features
 
-- a total of 3 runways ( A, B, C) 
+- Atcs class, the general control system, contains all airlines and each airline class contains its respective flights
+- a total of 3 runways ( A, B, C) available
 - Simulates flights with commercial, emergency and cargo types 
 - During Flight simulation, each flight is allocated a runway based on its direction and type
 - Mutexes used to ensure each runway is occupied by only one flight at a time
@@ -20,7 +21,7 @@ atcs class, the general control system, contains all airlines and each airline c
 ---
 ## Process Breakdown
 
-## AVN Generator (`avnController()`)
+### AVN Generator (`avnController()`)
 
 **Type:** Child Process in main (parent process) 
 **Pipe Used:** `violationPipe` (input), `avnResultsPipe` (output)
@@ -34,7 +35,7 @@ atcs class, the general control system, contains all airlines and each airline c
   - `avnResultsPipe` (read by the parent thread)
   - (optionally) `avnToAirline` for airline-specific portals
 
-## StripePay Processor (`stripePayProcess()`)
+### StripePay Processor (`stripePayProcess()`)
 
 **Type:** Child Process in main (parent process)
 **Pipe Used:** `AirlineToPayment` (input), `paymentToAirlinePortal` (output)
@@ -45,7 +46,7 @@ atcs class, the general control system, contains all airlines and each airline c
 - Updates the AVN's `paid` field to `true`
 - Sends the updated AVN to `paymentToAirlinePortal`
 
-## Airline Portal (`airlinePortalController()`)
+### Airline Portal (`airlinePortalController()`)
 
 **Type:** Child Process in main (parent process)
 **Pipe Used:** `paymentToAirlinePortal` (input)
