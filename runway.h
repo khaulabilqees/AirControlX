@@ -13,7 +13,6 @@ public:
     pthread_mutex_t locks[3]; // 3 diff runways so only one thread can have access at a time for one 
     bool availability[3]; // to see runways are available or not currently
 
-
     RunwayManager() {
         for (int i = 0; i < 3; ++i)
             pthread_mutex_init(&locks[i], NULL);

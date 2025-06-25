@@ -210,12 +210,6 @@ private:
             pthread_mutex_lock(&coutMutex);
             cout << "[VIOLATION] Flight " << flightID << ": Speed violation in phase " << status << "\n";
             pthread_mutex_unlock(&coutMutex);
-
-            /*string violationMsg = to_string(flightID) + "|" + airline + "|" + typeString + "|" + status + "|" +
-                              to_string(speed) + "|" + to_string(min) + "-" + to_string(max) + "|" +
-                              to_string(timestamp()) + "\n";*/
-            
-
             
             int fd = open("violationPipe", O_WRONLY | O_NONBLOCK);
             ViolationRecord rec;
